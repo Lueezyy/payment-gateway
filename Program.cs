@@ -12,8 +12,17 @@ string? currency = Console.ReadLine();
 Console.Write("Amount: ");
 string? amountText = Console.ReadLine();
 
-if (!decimal.TryParse(amountText, out decimal amount))
-{
+if (string.IsNullOrWhiteSpace(sender)){
+    Console.WriteLine("Sender name can't be blank.");
+    return;
+}
+
+if (string.IsNullOrWhiteSpace(recipient)){
+    Console.WriteLine("Recipient name can't be blank.");
+    return;
+}
+
+if (!decimal.TryParse(amountText, out decimal amount)){
     Console.WriteLine("Amount must be a number.");
     return;
 }
