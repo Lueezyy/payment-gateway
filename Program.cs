@@ -27,6 +27,11 @@ if (!decimal.TryParse(amountText, out decimal amount)){
     return;
 }
 
+if (amount <= 0){
+    Console.WriteLine("Amount must be greater than zero.");
+    return;
+}
+
 Console.WriteLine($"Sender is {sender}");
 Console.WriteLine($"Recipient is {recipient}");
 Console.WriteLine($"Currency is {currency}");
