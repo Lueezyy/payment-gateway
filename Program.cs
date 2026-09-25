@@ -22,6 +22,13 @@ if (string.IsNullOrWhiteSpace(recipient)){
     return;
 }
 
+currency = (currency ?? "").Trim().ToUpper();
+
+if (currency != "GBP" && currency != "EUR" && currency != "USD"){
+    Console.WriteLine("Currency must be GBP, EUR or USD.");
+    return;
+}
+
 if (!decimal.TryParse(amountText, out decimal amount)){
     Console.WriteLine("Amount must be a number.");
     return;
