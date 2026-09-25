@@ -37,10 +37,7 @@ else if (amount <= 0){
 
 if (errors.Count == 0){
     Console.WriteLine("Valid payment");
-    Console.WriteLine($"Sender is {sender}");
-    Console.WriteLine($"Recipient is {recipient}");
-    Console.WriteLine($"Currency is {currency}");
-    Console.WriteLine($"Amount is {amount}");
+    Console.WriteLine($"{sender} -> {recipient}: {amount:F2} {currency}");
 }
 else {
     foreach (string error in errors){
