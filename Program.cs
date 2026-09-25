@@ -12,34 +12,38 @@ string? currency = Console.ReadLine();
 Console.Write("Amount: ");
 string? amountText = Console.ReadLine();
 
+List<string> errors = new List<string>();
+
 if (string.IsNullOrWhiteSpace(sender)){
-    Console.WriteLine("Sender name can't be blank.");
-    return;
+    errors.Add("Sender name can't be blank.");
 }
 
 if (string.IsNullOrWhiteSpace(recipient)){
-    Console.WriteLine("Recipient name can't be blank.");
-    return;
+    errors.Add("Recipient name can't be blank.");
 }
 
 currency = (currency ?? "").Trim().ToUpper();
 
 if (currency != "GBP" && currency != "EUR" && currency != "USD"){
-    Console.WriteLine("Currency must be GBP, EUR or USD.");
-    return;
+    errors.Add("Currency must be GBP, EUR or USD.");
 }
 
 if (!decimal.TryParse(amountText, out decimal amount)){
-    Console.WriteLine("Amount must be a number.");
-    return;
+    errors.Add("Amount must be a number.");
+}
+else if (amount <= 0){
+    errors.Add("Amount must be greater than zero.");
 }
 
-if (amount <= 0){
-    Console.WriteLine("Amount must be greater than zero.");
-    return;
+if (errors.Count == 0){
+    Console.WriteLine("Valid payment");
+    Console.WriteLine($"Sender is {sender}");
+    Console.WriteLine($"Recipient is {recipient}");
+    Console.WriteLine($"Currency is {currency}");
+    Console.WriteLine($"Amount is {amount}");
 }
-
-Console.WriteLine($"Sender is {sender}");
-Console.WriteLine($"Recipient is {recipient}");
-Console.WriteLine($"Currency is {currency}");
-Console.WriteLine($"Amount is {amount}");
+else {
+    foreach (string error in errors){
+        Console.WriteLine(error);
+    }
+}
